@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Romeo & Juliet</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           CSS VARIABLES & GLOBAL RESET
+        ========================================= */
+        :root {
+            --primary-color: #C5A880; /* Elegant Gold/Cream */
+            --primary-dark: #A68B63;
+            --bg-color: #FDFBF7; /* Soft Off-White */
+            --bg-alt: #F4EFEB; /* Secondary Soft BG */
+            --text-main: #4A4A4A;
+            --text-light: #7A7A7A;
+            --white: #FFFFFF;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            --font-accent: 'Great Vibes', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            overflow: hidden; /* Hidden until opened */
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        /* =========================================
+           UTILITIES & ANIMATIONS
+        ========================================= */
+        .section-padding {
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* =========================================
+           COVER SECTION (OPENING)
+        ========================================= */
+        #cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #cover.opened {
+            transform: translateY(-100%);
+        }
+
+        .cover-content {
+            text-align: center;
+            color: var(--white);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .cover-content p {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .cover-content h1 {
+            font-family: var(--font-accent);
+            font-size: 5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .guest-name-box {
+            margin: 20px 0 30px;
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* =========================================
+           HERO SECTION
+        ========================================= */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(253, 251, 247, 0.8), rgba(253, 251, 247, 0.9)), url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-family: var(--font-accent);
+            font-size: 4rem;
+            color: var(--primary-dark);
+            margin: 20px 0;
+        }
+
+        /* =========================================
+           BIBLE VERSE
+        ========================================= */
+        #verse {
+            background-color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .verse-box {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .verse-box::before, .verse-box::after {
+            content: "❦";
+            color: var(--primary-color);
+            font-size: 2rem;
+            display: block;
+            margin: 15px 0;
+        }
+
+        .verse-text {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .verse-ref {
+            font-weight: 600;
+            color: var(--primary-dark);
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           COUPLE SECTION
+        ========================================= */
+        #couple {
+            background-color: var(--bg-alt);
+        }
+
+        .couple-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .profile {
+            text-align: center;
+            max-width: 350px;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 120px 120px 20px 20px;
+            margin: 0 auto 20px;
+            border: 8px solid var(--white);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            transition: transform 0.5s ease;
+        }
+
+        .profile:hover .profile-img {
+            transform: scale(1.03);
+        }
+
+        .profile h3 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .profile p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .ampersand {
+            font-family: var(--font-accent);
+            font-size: 5rem;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .couple-wrapper {
+                flex-direction: row;
+                justify-content: center;
+                gap: 80px;
+            }
+        }
+
+        /* =========================================
+           COUNTDOWN SECTION
+        ========================================= */
+        #countdown-section {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .countdown-box {
+            background-color: var(--bg-alt);
+            padding: 20px 15px;
+            border-radius: 15px;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .countdown-box span {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .countdown-box small {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+        }
+
+        /* =========================================
+           EVENT SECTION
+        ========================================= */
+        #event {
+            background-color: var(--bg-alt);
+        }
+
+        .event-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .event-card {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary-color);
+        }
+
+        .event-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .event-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        .event-detail {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .event-detail p {
+            margin-bottom: 5px;
+        }
+
+        .event-detail strong {
+            color: var(--primary-dark);
+        }
+
+        @media (min-width: 768px) {
+            .event-cards {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .event-card {
+                flex: 1;
+                max-width: 450px;
+            }
+        }
+
+        /* =========================================
+           GIFT SECTION (KADO DIGITAL)
+        ========================================= */
+        #gift {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .gift-container {
+            max-width: 600px;
+            margin: 40px auto 0;
+        }
+
+        .gift-card {
+            background-color: var(--bg-alt);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .bank-info h4 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .bank-info p {
+            font-size: 1.1rem;
+            font-family: monospace;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .bank-info small {
+            color: var(--text-light);
+        }
+
+        /* =========================================
+           RSVP & WISHES SECTION
+        ========================================= */
+        #rsvp-wishes {
+            background-color: var(--bg-alt);
+        }
+
+        .form-container {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background-color: #fcfcfc;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* Comments List */
+        .comments-list {
+            margin-top: 50px;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar for comments */
+        .comments-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .comments-list::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 10px;
+        }
+        .comments-list::-webkit-scrollbar-thumb {
+            background: var(--primary-color); 
+            border-radius: 10px;
+        }
+
+        .comment-card {
+            background-color: var(--bg-alt);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .comment-card h5 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .comment-card .badge {
+            font-size: 0.75rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: normal;
+        }
+
+        .comment-card p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        footer h2 {
+            font-family: var(--font-accent);
+            font-size: 3rem;
+            margin: 20px 0;
+            font-weight: normal;
+        }
+
+        /* =========================================
+           TOAST NOTIFICATION
+        ========================================= */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast">Notifikasi</div>
+
+    <!-- COVER SECTION -->
+    <section id="cover">
+        <div class="cover-content">
+            <p>The Wedding of</p>
+            <h1>Romeo & Juliet</h1>
+            
+            <div class="guest-name-box">
+                <p style="font-size: 0.9rem; margin-bottom: 5px;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Tamu Undangan</h3>
+            </div>
+            
+            <button class="btn" onclick="openInvitation()">Buka Undangan</button>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        
+        <!-- HERO SECTION -->
+        <section id="hero" class="section-padding">
+            <div class="container reveal">
+                <p>Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+                <h2>Romeo & Juliet</h2>
+                <p>#RomanceOfJuliet</p>
+            </div>
+        </section>
+
+        <!-- BIBLE VERSE SECTION -->
+        <section id="verse" class="section-padding">
+            <div class="container reveal delay-1">
+                <div class="verse-box">
+                    <p class="verse-text">"Apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia."</p>
+                    <p class="verse-ref">Matius 19:6</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUPLE SECTION -->
+        <section id="couple" class="section-padding text-center">
+            <div class="container">
+                <h2 class="title reveal">Mempelai</h2>
+                <p class="subtitle reveal delay-1">Yang Berbahagia</p>
+
+                <div class="couple-wrapper">
+                    <!-- Mempelai Wanita -->
+                    <div class="profile reveal delay-2">
+                        <img src="https://images.unsplash.com/photo-1546804784-816671b05214?auto=format&fit=crop&w=500&q=80" alt="Mempelai Wanita" class="profile-img">
+                        <h3>Juliet Capulet</h3>
+                        <p>Putri pertama dari<br>Bapak Capulet & Ibu Lady Capulet</p>
+                    </div>
+
+                    <div class="ampersand reveal delay-3">&</div>
+
+                    <!-- Mempelai Pria -->
+                    <div class="profile reveal delay-2">
+                        <img src="https://images.unsplash.com/photo-1606214041793-ecfb6fceceeb?auto=format&fit=crop&w=500&q=80" alt="Mempelai Pria" class="profile-img">
+                        <h3>Romeo Montague</h3>
+                        <p>Putra bungsu dari<br>Bapak Montague & Ibu Lady Montague</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUNTDOWN SECTION -->
+        <section id="countdown-section" class="section-padding text-center">
+            <div class="container reveal">
+                <h2 class="title">Menuju Hari Bahagia</h2>
+                <p>Waktu yang ditunggu-tunggu akan segera tiba</p>
+                
+                <div class="countdown-container">
+                    <div class="countdown-box">
+                        <span id="days">00</span>
+                        <small>Hari</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="hours">00</span>
+                        <small>Jam</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="minutes">00</span>
+                        <small>Menit</small>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="seconds">00</span>
+                        <small>Detik</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENT SECTION -->
+        <section id="event" class="section-padding text-center">
+            <div class="container">
+                <h2 class="title reveal">Informasi Acara</h2>
+                <p class="subtitle reveal delay-1">Save The Date</p>
+
+                <div class="event-cards">
+                    <!-- Pemberkatan -->
+                    <div class="event-card reveal delay-2">
+                        <div class="event-icon">💍</div>
+                        <h3>Pemberkatan</h3>
+                        <div class="event-detail">
+                            <p><strong>Sabtu, 28 November 2026</strong></p>
+                            <p>09:00 WIB - Selesai</p>
+                        </div>
+                        <div class="event-detail">
+                            <p><strong>Gereja Katedral Jakarta</strong></p>
+                            <p>Jl. Katedral No.7B, Pasar Baru, Sawah Besar, Jakarta Pusat</p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/dummyLink1" target="_blank" class="btn btn-outline">📍 Lihat Lokasi</a>
+                    </div>
+
+                    <!-- Resepsi -->
+                    <div class="event-card reveal delay-3">
+                        <div class="event-icon">🥂</div>
+                        <h3>Resepsi</h3>
+                        <div class="event-detail">
+                            <p><strong>Sabtu, 28 November 2026</strong></p>
+                            <p>18:30 WIB - Selesai</p>
+                        </div>
+                        <div class="event-detail">
+                            <p><strong>Hotel Mulia Senayan</strong></p>
+                            <p>Jl. Asia Afrika, Senayan, Jakarta Pusat</p>
+                        </div>
+                        <a href="https://maps.app.goo.gl/dummyLink2" target="_blank" class="btn btn-outline">📍 Lihat Lokasi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GIFT SECTION -->
+        <section id="gift" class="section-padding text-center">
+            <div class="container">
+                <h2 class="title reveal">Kado Digital</h2>
+                <p class="subtitle reveal delay-1">Tanda Kasih</p>
+                <p class="reveal delay-2" style="max-width: 600px; margin: 0 auto;">Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+
+                <div class="gift-container">
+                    <!-- Rekening 1 -->
+                    <div class="gift-card reveal delay-2">
+                        <div class="bank-info">
+                            <h4>BCA</h4>
+                            <p id="rek-bca">1234567890</p>
+                            <small>a.n. Romeo Montague</small>
+                        </div>
+                        <button class="btn btn-outline" onclick="copyText('rek-bca')">Copy</button>
+                    </div>
+
+                    <!-- Rekening 2 -->
+                    <div class="gift-card reveal delay-3">
+                        <div class="bank-info">
+                            <h4>Mandiri</h4>
+                            <p id="rek-mandiri">0987654321</p>
+                            <small>a.n. Juliet Capulet</small>
+                        </div>
+                        <button class="btn btn-outline" onclick="copyText('rek-mandiri')">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP & WISHES SECTION -->
+        <section id="rsvp-wishes" class="section-padding text-center">
+            <div class="container">
+                <h2 class="title reveal">RSVP & Ucapan</h2>
+                <p class="subtitle reveal delay-1">Kehadiran & Doa Restu</p>
+
+                <div class="form-container reveal delay-2">
+                    <form id="rsvp-form" onsubmit="handleRsvpSubmit(event)">
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap *</label>
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dari Undangan *</label>
+                            <div class="radio-group">
+                                <label class="radio-item">
+                                    <input type="radio" name="pihak" value="Mempelai Pria" required> Mempelai Pria
+                                </label>
+                                <label class="radio-item">
+                                    <input type="radio" name="pihak" value="Mempelai Wanita" required> Mempelai Wanita
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kehadiran">Konfirmasi Kehadiran *</label>
+                            <select id="kehadiran" name="kehadiran" class="form-control" required>
+                                <option value="" disabled selected>Pilih konfirmasi...</option>
+                                <option value="Hadir">Ya, Saya akan hadir</option>
+                                <option value="Tidak Hadir">Maaf, saya tidak bisa hadir</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jumlah">Jumlah Tamu (Opsional)</label>
+                            <select id="jumlah" name="jumlah" class="form-control">
+                                <option value="1">1 Orang</option>
+                                <option value="2">2 Orang</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
+                                <label for="pesan" style="margin-bottom: 0;">Pesan & Doa Restu *</label>
+                                <button type="button" id="ai-wish-btn" class="btn btn-outline" style="padding: 4px 12px; font-size: 0.8rem; border-radius: 8px;" onclick="generateAIWish()">✨ Buat Ucapan Cerdas</button>
+                            </div>
+                            <textarea id="pesan" name="pesan" class="form-control" placeholder="Tuliskan ucapan selamat dan doa untuk kedua mempelai..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%;">Kirim Ucapan & RSVP</button>
+                    </form>
+
+                    <!-- Comments Display Area -->
+                    <div class="comments-list" id="comments-list">
+                        <!-- Comments will be injected here via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container reveal">
+                <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+                <p style="margin-top: 20px;">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
+                <p>Kami yang berbahagia,</p>
+                <h2>Romeo & Juliet</h2>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- =========================================
+         JAVASCRIPT LOGIC
+    ========================================= -->
+    <script>
+        /* --- 1. Opening Animation & Scroll Unlock --- */
+        function openInvitation() {
+            const cover = document.getElementById('cover');
+            cover.classList.add('opened');
+            
+            // Enable scrolling
+            document.body.style.overflow = 'auto';
+            
+            // Trigger intersection observer manually for elements already in view
+            setTimeout(() => {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(reveal => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            }, 800); // Wait for cover animation to finish
+        }
+
+        /* --- 2. Scroll Animation (Intersection Observer) --- */
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((element) => {
+            observer.observe(element);
+        });
+
+        /* --- 3. Countdown Timer --- */
+        // Set target date (e.g., Nov 28, 2026 09:00:00)
+        const targetDate = new Date("Nov 28, 2026 09:00:00").getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? "0" + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+
+        /* --- 4. Copy to Clipboard & Toast --- */
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            
+            // Cross-browser fallback for copy command
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                document.execCommand("copy");
+                showToast("Nomor rekening berhasil disalin!");
+            } catch (err) {
+                showToast("Gagal menyalin. Silakan copy manual.");
+            }
+            
+            document.body.removeChild(tempInput);
+        }
+
+        /* --- 5. Gemini API: AI Wedding Wishes Generator ✨ --- */
+        const apiKey = ""; // API key disediakan oleh runtime environment
+
+        async function callGeminiAPI(prompt, retries = 5) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: "Anda adalah asisten pembuat ucapan pernikahan yang puitis, romantis, dan sopan dalam bahasa Indonesia." }] }
+            };
+
+            const delays = [1000, 2000, 4000, 8000, 16000]; // Exponential backoff
+
+            for (let i = 0; i <= retries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Selamat menempuh hidup baru Romeo & Juliet! Semoga bahagia selalu.";
+                } catch (error) {
+                    if (i === retries) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        async function generateAIWish() {
+            const btn = document.getElementById('ai-wish-btn');
+            const textarea = document.getElementById('pesan');
+            const namaTamu = document.getElementById('nama').value || "Seseorang";
+            
+            // Mencari tau dari pihak mana tamu diundang untuk personalisasi
+            const pihakElemen = document.querySelector('input[name="pihak"]:checked');
+            const pihak = pihakElemen ? pihakElemen.value : "kedua mempelai";
+
+            btn.disabled = true;
+            btn.innerText = "✨ Merangkai kata...";
+
+            const prompt = `Buatkan 1 paragraf ucapan selamat pernikahan yang manis, hangat, dan sopan dalam bahasa Indonesia untuk pasangan 'Romeo & Juliet'. Pengirim ucapan ini adalah '${namaTamu}' yang merupakan kenalan dari pihak '${pihak}'. Sertakan doa yang baik. Maksimal 3 kalimat singkat. Jangan gunakan format surat (tanpa Dear/Kepada), langsung isi ucapannya saja.`;
+
+            try {
+                const result = await callGeminiAPI(prompt);
+                // Membersihkan spasi atau kutipan berlebih di awal/akhir
+                textarea.value = result.replace(/^["']|["']$/g, '').trim();
+                showToast("✨ Ucapan berhasil dirangkai!");
+            } catch (error) {
+                console.error(error);
+                showToast("Gagal menyambung ke AI. Silakan tulis manual.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "✨ Buat Ucapan Cerdas";
+            }
+        }
+
+        /* --- 6. RSVP & Comments Logic (Google Sheets Integration) --- */
+        
+        // URL Web App dari Google Apps Script (WAJIB DIISI SETELAH DEPLOY SHEET)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzKGnSXh5e_6UC25lkulhFTynPlHTZdZIy1WXbqN0p05zaxsGkRcKdNJIGf9Vpa9oarhg/exec'; 
+
+        // Render comments to DOM
+        function renderComments(comments) {
+            const commentsList = document.getElementById('comments-list');
+            commentsList.innerHTML = '';
+
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p style="text-align: center; color: #777;">Belum ada ucapan. Jadilah yang pertama!</p>';
+                return;
+            }
+
+            comments.forEach(comment => {
+                const card = document.createElement('div');
+                card.className = 'comment-card';
+                
+                // HANYA MENAMPILKAN NAMA DAN PESAN SAJA (Privasi Data Terjaga)
+                card.innerHTML = `
+                    <h5>${comment.nama}</h5>
+                    <p style="font-size: 0.95rem; color: var(--text-main); margin-top: 5px;">"${comment.pesan}"</p>
+                `;
+                commentsList.appendChild(card);
+            });
+        }
+
+        // Ambil data komentar dari Google Sheets secara real-time
+        async function fetchComments() {
+            if (scriptURL === 'https://script.google.com/macros/s/AKfycbzKGnSXh5e_6UC25lkulhFTynPlHTZdZIy1WXbqN0p05zaxsGkRcKdNJIGf9Vpa9oarhg/exec') return;
+            
+            try {
+                const response = await fetch(scriptURL);
+                const data = await response.json();
+                renderComments(data);
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+            }
+        }
+
+        // Handle Form Submit ke Google Sheets
+        async function handleRsvpSubmit(event) {
+            event.preventDefault();
+
+            if (scriptURL === 'MASUKKAN_URL_WEB_APP_ANDA_DISINI') {
+                showToast("Sistem belum terhubung ke Google Sheets.");
+                return;
+            }
+
+            const form = document.getElementById('rsvp-form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Animasi Loading
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Mengirim...";
+
+            const formData = new FormData(form);
+            
+            try {
+                // Proses pengiriman data ke Google Script
+                await fetch(scriptURL, { method: 'POST', body: formData });
+                
+                showToast("Terima kasih! RSVP dan pesan Anda berhasil dikirim.");
+                form.reset();
+                
+                // Reload daftar komentar otomatis
+                fetchComments(); 
+            } catch (error) {
+                console.error('Error!', error.message);
+                showToast("Terjadi kesalahan. Silakan coba lagi.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Kirim Ucapan & RSVP";
+            }
+        }
+
+        // Initial render / Fetch pas halaman dibuka
+        window.onload = () => {
+            fetchComments();
+        };
+
+    </script>
+</body>
+</html>
