@@ -15,13 +15,17 @@
            CSS VARIABLES & GLOBAL RESET
         ========================================= */
         :root {
-            --primary-color: #C5A880; /* Elegant Gold/Cream */
-            --primary-dark: #A68B63;
-            --bg-color: #FDFBF7; /* Soft Off-White */
-            --bg-alt: #F4EFEB; /* Secondary Soft BG */
+            /* Tema Baru: Putih, Beige, Hijau Lembut */
+            --primary-color: #7A9175; /* Soft Green */
+            --primary-dark: #586B54;  /* Darker Green for text/hover */
+            --bg-color: #FFFFFF;      /* Pure White */
+            --bg-alt: #F8F6F0;        /* Soft Beige */
+            --accent-gold: #D4AF37;   /* Subtle Gold for shimmer/accents */
+            
             --text-main: #4A4A4A;
             --text-light: #7A7A7A;
             --white: #FFFFFF;
+            
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Poppins', sans-serif;
             --font-accent: 'Great Vibes', cursive;
@@ -57,7 +61,7 @@
         }
 
         /* =========================================
-           UTILITIES & ANIMATIONS
+           UTILITIES, SHIMMER & ANIMATIONS
         ========================================= */
         .section-padding {
             padding: 80px 20px;
@@ -81,13 +85,17 @@
 
         .subtitle {
             font-family: var(--font-accent);
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
             margin-bottom: 30px;
         }
 
+        /* Tombol Utama */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: var(--primary-color);
             color: var(--white);
             padding: 12px 30px;
@@ -97,12 +105,15 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4);
+            box-shadow: 0 4px 15px rgba(122, 145, 117, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(122, 145, 117, 0.4);
         }
 
         .btn:disabled {
@@ -115,11 +126,58 @@
             background-color: transparent;
             color: var(--primary-color);
             border: 1px solid var(--primary-color);
+            box-shadow: none;
         }
 
         .btn-outline:hover {
+            background-color: var(--bg-alt);
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        /* SHIMMER EFFECT */
+        .shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -150%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* Elemen Divider Elegan */
+        .divider {
+            width: 80px;
+            height: 2px;
             background-color: var(--primary-color);
-            color: var(--white);
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '✧';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--accent-gold);
+            background-color: var(--bg-color);
+            padding: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .bg-alt-divider::before {
+            background-color: var(--bg-alt);
         }
 
         /* Scroll Reveal Animation Classes */
@@ -147,7 +205,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(248, 246, 240, 0.8), rgba(248, 246, 240, 0.95)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -161,8 +219,8 @@
 
         .cover-content {
             text-align: center;
-            color: var(--white);
-            animation: fadeIn 2s ease-in-out;
+            color: var(--text-main);
+            animation: fadeInZoom 2s ease-out;
         }
 
         .cover-content p {
@@ -170,51 +228,109 @@
             letter-spacing: 2px;
             margin-bottom: 15px;
             text-transform: uppercase;
+            color: var(--primary-dark);
         }
 
         .cover-content h1 {
             font-family: var(--font-accent);
             font-size: 5rem;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: var(--primary-dark);
         }
 
         .guest-name-box {
             margin: 20px 0 30px;
             padding: 15px;
-            border-top: 1px solid rgba(255,255,255,0.5);
-            border-bottom: 1px solid rgba(255,255,255,0.5);
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
+        @keyframes fadeInZoom {
+            from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
 
         /* =========================================
-           HERO SECTION
+           HERO SECTION (ANIMATED FOCAL POINT)
         ========================================= */
         #hero {
-            height: 100vh;
-            background: linear-gradient(rgba(253, 251, 247, 0.8), rgba(253, 251, 247, 0.9)), url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            min-height: 100vh;
+            background-color: var(--bg-color);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-frame {
+            width: 140px;
+            height: 200px;
+            border-radius: 100px 100px 10px 10px; /* Arch shape */
+            overflow: hidden;
+            border: 5px solid var(--white);
+            box-shadow: 0 15px 35px rgba(122, 145, 117, 0.2);
+            background-color: var(--white);
+            position: relative;
+        }
+
+        /* Shimmer border effect on hero frames */
+        .hero-frame::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
+            transform: skewX(-20deg);
+            animation: shine 4s infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .hero-frame:nth-child(2) {
+            transform: translateY(20px); /* Slightly staggered */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
 
         .hero-content h2 {
             font-family: var(--font-accent);
             font-size: 4rem;
             color: var(--primary-dark);
-            margin: 20px 0;
+            margin: 10px 0;
+        }
+
+        @media (min-width: 768px) {
+            .hero-frame {
+                width: 180px;
+                height: 260px;
+            }
         }
 
         /* =========================================
            BIBLE VERSE
         ========================================= */
         #verse {
-            background-color: var(--white);
+            background-color: var(--bg-alt);
             text-align: center;
             padding: 60px 20px;
         }
@@ -222,15 +338,6 @@
         .verse-box {
             max-width: 700px;
             margin: 0 auto;
-            position: relative;
-        }
-
-        .verse-box::before, .verse-box::after {
-            content: "❦";
-            color: var(--primary-color);
-            font-size: 2rem;
-            display: block;
-            margin: 15px 0;
         }
 
         .verse-text {
@@ -239,6 +346,7 @@
             font-size: 1.3rem;
             color: var(--text-main);
             margin-bottom: 15px;
+            line-height: 1.8;
         }
 
         .verse-ref {
@@ -248,16 +356,16 @@
         }
 
         /* =========================================
-           COUPLE SECTION
+           COUPLE SECTION (STUDIO STYLE)
         ========================================= */
         #couple {
-            background-color: var(--bg-alt);
+            background-color: var(--bg-color);
         }
 
         .couple-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 50px;
             align-items: center;
             margin-top: 40px;
         }
@@ -267,19 +375,39 @@
             max-width: 350px;
         }
 
-        .profile-img {
-            width: 220px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 120px 120px 20px 20px;
-            margin: 0 auto 20px;
-            border: 8px solid var(--white);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        /* Studio Style Frame */
+        .profile-img-container {
+            width: 240px;
+            height: 320px;
+            margin: 0 auto 25px;
+            background-color: var(--white);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06), 0 5px 15px rgba(122, 145, 117, 0.1);
             transition: transform 0.5s ease;
+            position: relative;
         }
 
-        .profile:hover .profile-img {
-            transform: scale(1.03);
+        .profile-img-container::after {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(122, 145, 117, 0.3);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 4px;
+            background-color: var(--white); /* Ensure pure white background if image is transparent */
+        }
+
+        .profile:hover .profile-img-container {
+            transform: translateY(-8px);
         }
 
         .profile h3 {
@@ -296,7 +424,7 @@
 
         .ampersand {
             font-family: var(--font-accent);
-            font-size: 5rem;
+            font-size: 4.5rem;
             color: var(--primary-color);
             line-height: 1;
         }
@@ -305,6 +433,7 @@
             .couple-wrapper {
                 flex-direction: row;
                 justify-content: center;
+                align-items: flex-start;
                 gap: 80px;
             }
         }
@@ -313,7 +442,7 @@
            COUNTDOWN SECTION
         ========================================= */
         #countdown-section {
-            background-color: var(--white);
+            background-color: var(--bg-alt);
             text-align: center;
         }
 
@@ -325,18 +454,20 @@
         }
 
         .countdown-box {
-            background-color: var(--bg-alt);
+            background-color: var(--white);
             padding: 20px 15px;
-            border-radius: 15px;
+            border-radius: 10px;
             min-width: 80px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(197, 168, 128, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(122, 145, 117, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .countdown-box span {
             display: block;
             font-family: var(--font-heading);
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-dark);
             font-weight: bold;
         }
@@ -349,10 +480,10 @@
         }
 
         /* =========================================
-           EVENT SECTION
+           EVENT SECTION & ADD TO CALENDAR
         ========================================= */
         #event {
-            background-color: var(--bg-alt);
+            background-color: var(--bg-color);
         }
 
         .event-cards {
@@ -360,16 +491,17 @@
             flex-direction: column;
             gap: 30px;
             margin-top: 40px;
+            margin-bottom: 40px;
         }
 
         .event-card {
-            background-color: var(--white);
+            background-color: var(--bg-alt);
             padding: 40px 30px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(122, 145, 117, 0.15);
         }
 
         .event-card::before {
@@ -378,7 +510,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background-color: var(--primary-color);
         }
 
@@ -407,6 +539,11 @@
             color: var(--primary-dark);
         }
 
+        .calendar-action {
+            margin-top: 50px;
+            text-align: center;
+        }
+
         @media (min-width: 768px) {
             .event-cards {
                 flex-direction: row;
@@ -422,7 +559,7 @@
            GIFT SECTION (KADO DIGITAL)
         ========================================= */
         #gift {
-            background-color: var(--white);
+            background-color: var(--bg-alt);
             text-align: center;
         }
 
@@ -432,7 +569,7 @@
         }
 
         .gift-card {
-            background-color: var(--bg-alt);
+            background-color: var(--white);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 20px;
@@ -440,7 +577,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(197, 168, 128, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(122, 145, 117, 0.2);
         }
 
         .bank-info h4 {
@@ -464,14 +602,14 @@
            RSVP & WISHES SECTION
         ========================================= */
         #rsvp-wishes {
-            background-color: var(--bg-alt);
+            background-color: var(--bg-color);
         }
 
         .form-container {
-            background-color: var(--white);
+            background-color: var(--bg-alt);
             padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(122, 145, 117, 0.15);
             max-width: 800px;
             margin: 40px auto;
         }
@@ -491,18 +629,17 @@
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #dcdcdc;
             border-radius: 8px;
             font-family: var(--font-body);
             font-size: 1rem;
-            background-color: #fcfcfc;
+            background-color: var(--white);
             transition: border-color 0.3s;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
-            background-color: var(--white);
         }
 
         textarea.form-control {
@@ -532,12 +669,11 @@
             padding-right: 10px;
         }
 
-        /* Custom Scrollbar for comments */
         .comments-list::-webkit-scrollbar {
             width: 6px;
         }
         .comments-list::-webkit-scrollbar-track {
-            background: #f1f1f1; 
+            background: #e9e9e9; 
             border-radius: 10px;
         }
         .comments-list::-webkit-scrollbar-thumb {
@@ -546,11 +682,12 @@
         }
 
         .comment-card {
-            background-color: var(--bg-alt);
+            background-color: var(--white);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 15px;
             border-left: 4px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -561,15 +698,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .comment-card .badge {
-            font-size: 0.75rem;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 10px;
-            font-weight: normal;
         }
 
         .comment-card p {
@@ -639,19 +767,32 @@
                 <h3 style="font-family: var(--font-heading); font-size: 1.5rem;">Tamu Undangan</h3>
             </div>
             
-            <button class="btn" onclick="openInvitation()">Buka Undangan</button>
+            <button class="btn shimmer" onclick="openInvitation()">Buka Undangan</button>
         </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <main id="main-content">
         
-        <!-- HERO SECTION -->
+        <!-- HERO SECTION (ANIMATED FOCAL POINT) -->
         <section id="hero" class="section-padding">
             <div class="container reveal">
-                <p>Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
-                <h2>Romeo & Juliet</h2>
-                <p>#RomanceOfJuliet</p>
+                <!-- Elemen Animasi Frame Foto Pasangan -->
+                <div class="hero-images">
+                    <div class="hero-frame">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Romeo - Groom">
+                    </div>
+                    <div class="hero-frame">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=500&q=80" alt="Juliet - Bride">
+                    </div>
+                </div>
+
+                <div class="hero-content">
+                    <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; color: var(--text-light);">We Are Tying The Knot</p>
+                    <h2>Romeo & Juliet</h2>
+                    <div class="divider"></div>
+                    <p style="max-width: 600px; margin: 0 auto; color: var(--text-main);">Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.</p>
+                </div>
             </div>
         </section>
 
@@ -660,6 +801,7 @@
             <div class="container reveal delay-1">
                 <div class="verse-box">
                     <p class="verse-text">"Apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia."</p>
+                    <div class="divider bg-alt-divider" style="width: 40px;"></div>
                     <p class="verse-ref">Matius 19:6</p>
                 </div>
             </div>
@@ -674,7 +816,9 @@
                 <div class="couple-wrapper">
                     <!-- Mempelai Wanita -->
                     <div class="profile reveal delay-2">
-                        <img src="https://images.unsplash.com/photo-1546804784-816671b05214?auto=format&fit=crop&w=500&q=80" alt="Mempelai Wanita" class="profile-img">
+                        <div class="profile-img-container shimmer">
+                            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=500&q=80" alt="Mempelai Wanita">
+                        </div>
                         <h3>Juliet Capulet</h3>
                         <p>Putri pertama dari<br>Bapak Capulet & Ibu Lady Capulet</p>
                     </div>
@@ -683,7 +827,9 @@
 
                     <!-- Mempelai Pria -->
                     <div class="profile reveal delay-2">
-                        <img src="https://images.unsplash.com/photo-1606214041793-ecfb6fceceeb?auto=format&fit=crop&w=500&q=80" alt="Mempelai Pria" class="profile-img">
+                        <div class="profile-img-container shimmer">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Mempelai Pria">
+                        </div>
                         <h3>Romeo Montague</h3>
                         <p>Putra bungsu dari<br>Bapak Montague & Ibu Lady Montague</p>
                     </div>
@@ -698,19 +844,19 @@
                 <p>Waktu yang ditunggu-tunggu akan segera tiba</p>
                 
                 <div class="countdown-container">
-                    <div class="countdown-box">
+                    <div class="countdown-box shimmer">
                         <span id="days">00</span>
                         <small>Hari</small>
                     </div>
-                    <div class="countdown-box">
+                    <div class="countdown-box shimmer">
                         <span id="hours">00</span>
                         <small>Jam</small>
                     </div>
-                    <div class="countdown-box">
+                    <div class="countdown-box shimmer">
                         <span id="minutes">00</span>
                         <small>Menit</small>
                     </div>
-                    <div class="countdown-box">
+                    <div class="countdown-box shimmer">
                         <span id="seconds">00</span>
                         <small>Detik</small>
                     </div>
@@ -735,9 +881,9 @@
                         </div>
                         <div class="event-detail">
                             <p><strong>Gereja Katedral Jakarta</strong></p>
-                            <p>Jl. Katedral No.7B, Pasar Baru, Sawah Besar, Jakarta Pusat</p>
+                            <p>Jl. Katedral No.7B, Pasar Baru, Jakarta Pusat</p>
                         </div>
-                        <a href="https://maps.app.goo.gl/dummyLink1" target="_blank" class="btn btn-outline">📍 Lihat Lokasi</a>
+                        <a href="https://maps.app.goo.gl/dummyLink1" target="_blank" class="btn btn-outline" style="margin-top: 10px;">📍 Lihat Lokasi</a>
                     </div>
 
                     <!-- Resepsi -->
@@ -752,8 +898,16 @@
                             <p><strong>Hotel Mulia Senayan</strong></p>
                             <p>Jl. Asia Afrika, Senayan, Jakarta Pusat</p>
                         </div>
-                        <a href="https://maps.app.goo.gl/dummyLink2" target="_blank" class="btn btn-outline">📍 Lihat Lokasi</a>
+                        <a href="https://maps.app.goo.gl/dummyLink2" target="_blank" class="btn btn-outline" style="margin-top: 10px;">📍 Lihat Lokasi</a>
                     </div>
+                </div>
+
+                <!-- ADD TO MY CALENDAR BUTTON -->
+                <div class="calendar-action reveal delay-3">
+                    <button class="btn shimmer" onclick="downloadICS()">
+                        📅 Add to My Calendar
+                    </button>
+                    <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">Simpan jadwal di kalender agar tidak terlewat momen bahagia kami.</p>
                 </div>
             </div>
         </section>
@@ -763,6 +917,7 @@
             <div class="container">
                 <h2 class="title reveal">Kado Digital</h2>
                 <p class="subtitle reveal delay-1">Tanda Kasih</p>
+                <div class="divider bg-alt-divider"></div>
                 <p class="reveal delay-2" style="max-width: 600px; margin: 0 auto;">Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
 
                 <div class="gift-container">
@@ -773,7 +928,7 @@
                             <p id="rek-bca">1234567890</p>
                             <small>a.n. Romeo Montague</small>
                         </div>
-                        <button class="btn btn-outline" onclick="copyText('rek-bca')">Copy</button>
+                        <button class="btn btn-outline shimmer" onclick="copyText('rek-bca')">Copy</button>
                     </div>
 
                     <!-- Rekening 2 -->
@@ -783,7 +938,7 @@
                             <p id="rek-mandiri">0987654321</p>
                             <small>a.n. Juliet Capulet</small>
                         </div>
-                        <button class="btn btn-outline" onclick="copyText('rek-mandiri')">Copy</button>
+                        <button class="btn btn-outline shimmer" onclick="copyText('rek-mandiri')">Copy</button>
                     </div>
                 </div>
             </div>
@@ -834,12 +989,12 @@
                         <div class="form-group">
                             <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 8px;">
                                 <label for="pesan" style="margin-bottom: 0;">Pesan & Doa Restu *</label>
-                                <button type="button" id="ai-wish-btn" class="btn btn-outline" style="padding: 4px 12px; font-size: 0.8rem; border-radius: 8px;" onclick="generateAIWish()">✨ Buat Ucapan Cerdas</button>
+                                <button type="button" id="ai-wish-btn" class="btn btn-outline shimmer" style="padding: 4px 12px; font-size: 0.8rem; border-radius: 8px;" onclick="generateAIWish()">✨ Buat Ucapan</button>
                             </div>
                             <textarea id="pesan" name="pesan" class="form-control" placeholder="Tuliskan ucapan selamat dan doa untuk kedua mempelai..." required></textarea>
                         </div>
 
-                        <button type="submit" class="btn" style="width: 100%;">Kirim Ucapan & RSVP</button>
+                        <button type="submit" class="btn shimmer" style="width: 100%;">Kirim Ucapan & RSVP</button>
                     </form>
 
                     <!-- Comments Display Area -->
@@ -854,7 +1009,7 @@
         <footer>
             <div class="container reveal">
                 <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-                <p style="margin-top: 20px;">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
+                <div class="divider" style="background-color: rgba(255,255,255,0.2);"></div>
                 <p>Kami yang berbahagia,</p>
                 <h2>Romeo & Juliet</h2>
             </div>
@@ -909,7 +1064,7 @@
         });
 
         /* --- 3. Countdown Timer --- */
-        // Set target date (e.g., Nov 28, 2026 09:00:00)
+        // Set target date: Nov 28, 2026 09:00:00
         const targetDate = new Date("Nov 28, 2026 09:00:00").getTime();
 
         const countdownInterval = setInterval(() => {
@@ -946,8 +1101,6 @@
 
         function copyText(elementId) {
             const textToCopy = document.getElementById(elementId).innerText;
-            
-            // Cross-browser fallback for copy command
             const tempInput = document.createElement("input");
             tempInput.value = textToCopy;
             document.body.appendChild(tempInput);
@@ -963,8 +1116,55 @@
             document.body.removeChild(tempInput);
         }
 
-        /* --- 5. Gemini API: AI Wedding Wishes Generator ✨ --- */
-        const apiKey = ""; // API key disediakan oleh runtime environment
+        /* --- 5. Download ICS (Add to Calendar) --- */
+        function downloadICS() {
+            // Membangun struktur format file kalender (.ics) dengan alarm otomatis
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Invitation//Romeo & Juliet//ID
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:Pernikahan Romeo & Juliet
+DTSTART;TZID=Asia/Jakarta:20261128T090000
+DTEND;TZID=Asia/Jakarta:20261128T210000
+LOCATION:Gereja Katedral Jakarta & Hotel Mulia Senayan
+DESCRIPTION:Undangan pernikahan Romeo & Juliet.\\nTerima kasih telah meluangkan waktu untuk hadir.
+BEGIN:VALARM
+TRIGGER:-PT120H
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Pernikahan Romeo & Juliet H-5
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT24H
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Pernikahan Romeo & Juliet H-1
+END:VALARM
+BEGIN:VALARM
+TRIGGER:PT0M
+ACTION:DISPLAY
+DESCRIPTION:Pernikahan Romeo & Juliet Dimulai!
+END:VALARM
+END:VEVENT
+END:VCALENDAR`.replace(/\n/g, "\r\n"); // Standar baris ICS menggunakan CRLF
+
+            // Proses generate file ICS dan trigger pengunduhan
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            
+            link.href = url;
+            link.setAttribute('download', 'Pernikahan_Romeo_Juliet.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            showToast("Jadwal kalender berhasil diunduh!");
+        }
+
+        /* --- 6. Gemini API: AI Wedding Wishes Generator ✨ --- */
+        const apiKey = ""; 
 
         async function callGeminiAPI(prompt, retries = 5) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
@@ -973,7 +1173,7 @@
                 systemInstruction: { parts: [{ text: "Anda adalah asisten pembuat ucapan pernikahan yang puitis, romantis, dan sopan dalam bahasa Indonesia." }] }
             };
 
-            const delays = [1000, 2000, 4000, 8000, 16000]; // Exponential backoff
+            const delays = [1000, 2000, 4000, 8000, 16000];
 
             for (let i = 0; i <= retries; i++) {
                 try {
@@ -983,12 +1183,9 @@
                         body: JSON.stringify(payload)
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     const result = await response.json();
-                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Selamat menempuh hidup baru Romeo & Juliet! Semoga bahagia selalu.";
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "Selamat menempuh hidup baru! Semoga bahagia selalu.";
                 } catch (error) {
                     if (i === retries) throw error;
                     await new Promise(resolve => setTimeout(resolve, delays[i]));
@@ -1001,7 +1198,6 @@
             const textarea = document.getElementById('pesan');
             const namaTamu = document.getElementById('nama').value || "Seseorang";
             
-            // Mencari tau dari pihak mana tamu diundang untuk personalisasi
             const pihakElemen = document.querySelector('input[name="pihak"]:checked');
             const pihak = pihakElemen ? pihakElemen.value : "kedua mempelai";
 
@@ -1012,7 +1208,6 @@
 
             try {
                 const result = await callGeminiAPI(prompt);
-                // Membersihkan spasi atau kutipan berlebih di awal/akhir
                 textarea.value = result.replace(/^["']|["']$/g, '').trim();
                 showToast("✨ Ucapan berhasil dirangkai!");
             } catch (error) {
@@ -1020,16 +1215,13 @@
                 showToast("Gagal menyambung ke AI. Silakan tulis manual.");
             } finally {
                 btn.disabled = false;
-                btn.innerText = "✨ Buat Ucapan Cerdas";
+                btn.innerText = "✨ Buat Ucapan";
             }
         }
 
-        /* --- 6. RSVP & Comments Logic (Google Sheets Integration) --- */
-        
-        // URL Web App dari Google Apps Script (WAJIB DIISI SETELAH DEPLOY SHEET)
+        /* --- 7. RSVP & Comments Logic (Google Sheets Integration) --- */
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzKGnSXh5e_6UC25lkulhFTynPlHTZdZIy1WXbqN0p05zaxsGkRcKdNJIGf9Vpa9oarhg/exec'; 
 
-        // Render comments to DOM
         function renderComments(comments) {
             const commentsList = document.getElementById('comments-list');
             commentsList.innerHTML = '';
@@ -1042,8 +1234,6 @@
             comments.forEach(comment => {
                 const card = document.createElement('div');
                 card.className = 'comment-card';
-                
-                // HANYA MENAMPILKAN NAMA DAN PESAN SAJA (Privasi Data Terjaga)
                 card.innerHTML = `
                     <h5>${comment.nama}</h5>
                     <p style="font-size: 0.95rem; color: var(--text-main); margin-top: 5px;">"${comment.pesan}"</p>
@@ -1052,10 +1242,8 @@
             });
         }
 
-        // Ambil data komentar dari Google Sheets secara real-time
         async function fetchComments() {
             if (scriptURL === 'https://script.google.com/macros/s/AKfycbzKGnSXh5e_6UC25lkulhFTynPlHTZdZIy1WXbqN0p05zaxsGkRcKdNJIGf9Vpa9oarhg/exec') return;
-            
             try {
                 const response = await fetch(scriptURL);
                 const data = await response.json();
@@ -1065,11 +1253,10 @@
             }
         }
 
-        // Handle Form Submit ke Google Sheets
         async function handleRsvpSubmit(event) {
             event.preventDefault();
 
-            if (scriptURL === 'MASUKKAN_URL_WEB_APP_ANDA_DISINI') {
+            if (scriptURL === 'https://script.google.com/macros/s/AKfycbzKGnSXh5e_6UC25lkulhFTynPlHTZdZIy1WXbqN0p05zaxsGkRcKdNJIGf9Vpa9oarhg/exec') {
                 showToast("Sistem belum terhubung ke Google Sheets.");
                 return;
             }
@@ -1077,20 +1264,15 @@
             const form = document.getElementById('rsvp-form');
             const submitBtn = form.querySelector('button[type="submit"]');
             
-            // Animasi Loading
             submitBtn.disabled = true;
             submitBtn.innerText = "Mengirim...";
 
             const formData = new FormData(form);
             
             try {
-                // Proses pengiriman data ke Google Script
                 await fetch(scriptURL, { method: 'POST', body: formData });
-                
                 showToast("Terima kasih! RSVP dan pesan Anda berhasil dikirim.");
                 form.reset();
-                
-                // Reload daftar komentar otomatis
                 fetchComments(); 
             } catch (error) {
                 console.error('Error!', error.message);
@@ -1101,7 +1283,6 @@
             }
         }
 
-        // Initial render / Fetch pas halaman dibuka
         window.onload = () => {
             fetchComments();
         };
